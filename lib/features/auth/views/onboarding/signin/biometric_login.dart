@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:valarpay/core/utils/color_utils.dart';
-import 'package:valarpay/features/auth/widgets/need_help_modal.dart';
+import 'package:valarpayee/core/utils/color_utils.dart';
+import 'package:valarpayee/features/auth/widgets/need_help_modal.dart';
 
 class BiometricLoginScreen extends StatelessWidget {
   const BiometricLoginScreen({super.key});
@@ -31,7 +31,7 @@ class BiometricLoginScreen extends StatelessWidget {
         padding: EdgeInsets.all(24.w),
         child: Column(
           children: [
-            // ValarPay Logo
+            // ValarPayee Logo
             Row(
               children: [
                 Container(
@@ -49,7 +49,7 @@ class BiometricLoginScreen extends StatelessWidget {
                 ),
                 SizedBox(width: 12.w),
                 Text(
-                  'ValarPay',
+                  'ValarPayee',
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.bold,

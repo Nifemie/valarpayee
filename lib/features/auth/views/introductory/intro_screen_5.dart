@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:valarpay/core/utils/color_utils.dart';
+import 'package:valarpayee/core/utils/color_utils.dart';
 
 class IntroScreen5 extends StatelessWidget {
   const IntroScreen5({super.key});
@@ -30,7 +30,7 @@ class IntroScreen5 extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // ValarPay Logo
+                    // ValarPayee Logo
                     Container(
                       width: 80,
                       height: 80,
@@ -48,7 +48,7 @@ class IntroScreen5 extends StatelessWidget {
 
                     // Welcome text
                     const Text(
-                      'Welcome to ValarPay',
+                      'Welcome to ValarPayee',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,

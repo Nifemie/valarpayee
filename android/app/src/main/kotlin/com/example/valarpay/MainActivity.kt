@@ -1,4 +1,4 @@
-package com.example.valarpay
+package com.example.valarpayee
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:valarpay/core/utils/platform_responsive.dart';
-import 'package:valarpay/features/auth/widgets/need_help_modal.dart';
-import 'package:valarpay/core/utils/color_utils.dart';
+import 'package:valarpayee/core/utils/platform_responsive.dart';
+import 'package:valarpayee/features/auth/widgets/need_help_modal.dart';
+import 'package:valarpayee/core/utils/color_utils.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -46,7 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ValarPay Logo
+              // ValarPayee Logo
               Row(
                 children: [
                   Container(
@@ -64,7 +64,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   PlatformResponsive.sizedBoxW(12),
                   Text(
-                    'ValarPay',
+                    'ValarPayee',
                     style: TextStyle(
                       fontSize: 24.rsp,
                       fontWeight: FontWeight.bold,

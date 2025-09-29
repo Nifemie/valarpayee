@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:valarpay/core/utils/color_utils.dart';
+import 'package:valarpayee/core/utils/color_utils.dart';
 import 'core/routing/app_router.dart';
 
 void main() {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:valarpay/core/utils/color_utils.dart';
-import 'package:valarpay/features/auth/widgets/need_help_modal.dart';
+import 'package:valarpayee/core/utils/color_utils.dart';
+import 'package:valarpayee/features/auth/widgets/need_help_modal.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -324,7 +324,7 @@ class _SignupScreenState extends State<SignupScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ValarPay Logo
+            // ValarPayee Logo
             Row(
               children: [
                 Container(
@@ -342,7 +342,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 const SizedBox(width: 12),
                 const Text(
-                  'ValarPay',
+                  'ValarPayee',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
