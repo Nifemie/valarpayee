@@ -1,12 +1,92 @@
-
 import 'package:go_router/go_router.dart';
 import '../../features/dashboard/view/homescreen.dart';
+import '../../features/auth/views/introductory/intro_wrapper.dart';
+import '../../features/auth/views/onboarding/signup/signup.dart';
+import '../../features/auth/views/onboarding/signup/personal_details.dart';
+import '../../features/auth/views/onboarding/signup/business_details.dart';
+import '../../features/auth/views/onboarding/signup/email_password.dart';
+import '../../features/auth/views/onboarding/signup/verify_email.dart';
+import '../../features/auth/views/onboarding/signup/phone_number.dart';
+import '../../features/auth/views/onboarding/signup/verify_phone.dart';
+import '../../features/auth/views/onboarding/signup/signup_success.dart';
+import '../../features/auth/views/introductory/intro_screen_5.dart';
+import '../../features/auth/views/onboarding/signin/signin.dart';
+import '../../features/auth/views/onboarding/signin/biometric_login.dart';
+import '../../features/auth/views/onboarding/signin/verify_fingerprint.dart';
+import '../../features/auth/views/onboarding/signin/passcode_login.dart';
+import '../../features/auth/views/onboarding/forgot_password.dart';
+import '../../features/auth/views/onboarding/change_password.dart';
 
 final router = GoRouter(
+  initialLocation: '/intro',
   routes: [
     GoRoute(
       path: '/',
       builder: (context, state) => const Homescreen(),
+    ),
+    GoRoute(
+      path: '/intro',
+      builder: (context, state) => const IntroductoryScreen(),
+    ),
+    GoRoute(
+      path: '/signup',
+      builder: (context, state) => const SignupScreen(),
+    ),
+    GoRoute(
+      path: '/personal-details',
+      builder: (context, state) => const PersonalDetailsScreen(),
+    ),
+    GoRoute(
+      path: '/business-details',
+      builder: (context, state) => const BusinessDetailsScreen(),
+    ),
+    GoRoute(
+      path: '/email-password',
+      builder: (context, state) => const EmailPasswordScreen(),
+    ),
+    GoRoute(
+      path: '/verify-email',
+      builder: (context, state) => const VerifyEmailScreen(),
+    ),
+    GoRoute(
+      path: '/phone-number',
+      builder: (context, state) => const PhoneNumberScreen(),
+    ),
+    GoRoute(
+      path: '/verify-phone',
+      builder: (context, state) => const VerifyPhoneScreen(),
+    ),
+    GoRoute(
+      path: '/signup-success',
+      builder: (context, state) => const SignupSuccessScreen(),
+    ),
+    GoRoute(
+      path: '/intro5',
+      builder: (context, state) => const IntroScreen5(),
+    ),
+    GoRoute(
+      path: '/signin',
+      builder: (context, state) => const SignInScreen(),
+    ),
+    GoRoute(
+      path: '/biometric-login',
+      builder: (context, state) => const BiometricLoginScreen(),
+    ),
+    GoRoute(
+      path: '/verify-fingerprint',
+      builder: (context, state) => const VerifyFingerprintScreen(),
+    ),
+    GoRoute(
+      path: '/passcode-login',
+      builder: (context, state) => const PasscodeLoginScreen(),
+    ),
+    GoRoute(
+      path: '/forgot-password',
+      builder: (context, state) => const ForgotPasswordScreen(),
+    ),
+    GoRoute(
+      path: '/change-password',
+      builder: (context, state) => const ChangePasswordScreen(),
     ),
   ],
 );
