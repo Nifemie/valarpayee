@@ -52,7 +52,7 @@ class AppTheme {
       bottomAppBarTheme: const BottomAppBarTheme(
         color: Color(0xFF2A2A2A),
       ),
-      cardColor: const Color(0xFF46352B),
+      cardColor: const Color(0xFF2B2725),
       textTheme: const TextTheme(
         labelSmall: TextStyle(color: Color(0xFFF9FAFB)),
         labelMedium: TextStyle(

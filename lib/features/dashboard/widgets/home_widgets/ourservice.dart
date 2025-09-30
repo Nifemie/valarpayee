@@ -40,7 +40,7 @@ class OurServicesWidget extends StatelessWidget {
         Container(
           padding: const EdgeInsets.fromLTRB(12, 16, 12, 16),
           decoration: BoxDecoration(
-            color: const Color(0xFF2B2725),
+            color: Theme.of(context).cardColor, // Use theme's cardColor
             borderRadius: BorderRadius.circular(16),
           ),
           child: GridView.builder(

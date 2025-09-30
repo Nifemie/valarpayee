@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart'; // Import GoRouter
 
 class CustomBottomNavBar extends StatefulWidget {
   const CustomBottomNavBar({Key? key}) : super(key: key);
@@ -11,33 +12,63 @@ class CustomBottomNavBar extends StatefulWidget {
 class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   int _selectedIndex = 0;
 
-  final List<NavItem> _navItems = [
+  final List<NavItem> _navItems = const [ // Made const
     NavItem(
-      icon: 'assets/images/nav_icons/home.svg', // Replace with your SVG path
+      icon: 'assets/images/nav_icons/home.svg',
       label: 'Home',
+      route: '/', // Added route
     ),
     NavItem(
-      icon: 'assets/images/nav_icons/bank.svg', // Replace with your SVG path
+      icon: 'assets/images/nav_icons/bank.svg',
       label: 'Finance',
+      route: '/finance', // Placeholder route
     ),
     NavItem(
-      icon: 'assets/images/nav_icons/briefcase.svg', // Replace with your SVG path
+      icon: 'assets/images/nav_icons/briefcase.svg',
       label: 'Invest',
+      route: '/invest', // Placeholder route
     ),
     NavItem(
-      icon: 'assets/images/nav_icons/card-pos.svg', // Replace with your SVG path
+      icon: 'assets/images/nav_icons/card-pos.svg',
       label: 'Cards',
+      route: '/cards', // Placeholder route
     ),
     NavItem(
-      icon: 'assets/images/nav_icons/profile-circle.svg', // Replace with your SVG path
+      icon: 'assets/images/nav_icons/profile-circle.svg',
       label: 'Me',
+      route: '/me', // Added route
     ),
   ];
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _updateSelectedIndexFromRoute();
+  }
+
+  void _updateSelectedIndexFromRoute() {
+    final String location = GoRouter.of(context).routerDelegate.currentConfiguration.uri.toString();
+    int newIndex = 0; // Default to Home
+    int bestMatchLength = -1;
+
+    for (int i = 0; i < _navItems.length; i++) {
+      if (location.startsWith(_navItems[i].route) && _navItems[i].route.length > bestMatchLength) {
+        bestMatchLength = _navItems[i].route.length;
+        newIndex = i;
+      }
+    }
+
+    if (_selectedIndex != newIndex) {
+      setState(() {
+        _selectedIndex = newIndex;
+      });
+    }
+  }
+
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    // Navigate using GoRouter
+    context.go(_navItems[index].route);
+    // The _selectedIndex will be updated by didChangeDependencies when the route changes
   }
 
   @override
@@ -45,8 +76,8 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     return Container(
       width: 375,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-      decoration: const BoxDecoration( // Reverted to const and black
-        color: Colors.black, // Reverted to black
+      decoration: const BoxDecoration(
+        color: Colors.black,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,7 +118,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                 fontFamily: 'SF Pro',
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
-                height: 16 / 12, // line-height / font-size
+                height: 16 / 12,
                 letterSpacing: 0.06,
               ),
             ),
@@ -101,13 +132,11 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
 class NavItem {
   final String icon;
   final String label;
+  final String route; // Added route property
 
-  NavItem({
+  const NavItem({ // Added const
     required this.icon,
     required this.label,
+    required this.route, // Added route
   });
 }
-
-// Usage example:
-// In your Scaffold:
-// bottomNavigationBar: const CustomBottomNavBar(),

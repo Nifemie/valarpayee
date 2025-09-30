@@ -71,6 +71,7 @@ flutter:
     - assets/images/payment_wid/
     - assets/images/nav_icons/
     - assets/images/service_icon/
+    - assets/images/me_icons/
     # - assets/fonts/
 
 

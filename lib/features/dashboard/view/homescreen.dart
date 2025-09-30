@@ -1,11 +1,12 @@
 import 'dart:async'; // Import for Timer
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '/features/dashboard/widgets/payment_widget_icons.dart';
-import '/features/dashboard/widgets/kyc_widget.dart';
-import '/features/dashboard/widgets/ourservice.dart';
+import '../widgets/home_widgets/payment_widget_icons.dart';
+import '../widgets/home_widgets/kyc_widget.dart';
+import '../widgets/home_widgets/ourservice.dart';
 import '/features/dashboard/widgets/navbar.dart';
 import '../../../core/themes/app_theme.dart';
+import 'package:go_router/go_router.dart';
 
 class Homescreen extends StatefulWidget {
   final String firstName;

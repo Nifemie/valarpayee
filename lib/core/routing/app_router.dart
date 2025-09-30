@@ -1,3 +1,4 @@
+import '../../features/dashboard/view/me.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/dashboard/view/homescreen.dart';
 import '../../features/auth/views/introductory/intro_wrapper.dart';
@@ -16,10 +17,17 @@ import '../../features/auth/views/onboarding/signin/verify_fingerprint.dart';
 import '../../features/auth/views/onboarding/signin/passcode_login.dart';
 import '../../features/auth/views/onboarding/forgot_password.dart';
 import '../../features/auth/views/onboarding/change_password.dart';
+import '../../features/auth/views/splashscreen/splashscreen.dart';
 
 final router = GoRouter(
-  initialLocation: '/intro',
+  initialLocation: '/splash',
   routes: [
+    GoRoute(
+      path: '/splash',
+      builder: (context, state) => SplashScreen(
+        onAnimationComplete: () => context.go('/intro'),
+      ),
+    ),
     GoRoute(
       path: '/',
       builder: (context, state) => const Homescreen(
@@ -72,7 +80,9 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/signin',
-      builder: (context, state) => const SignInScreen(),
+      pageBuilder: (context, state) => const NoTransitionPage(
+        child: SignInScreen(),
+      ),
     ),
     GoRoute(
       path: '/biometric-login',
@@ -93,6 +103,10 @@ final router = GoRouter(
     GoRoute(
       path: '/change-password',
       builder: (context, state) => const ChangePasswordScreen(),
+    ),
+    GoRoute(
+      path: '/me', // New route for MeScreen
+      builder: (context, state) => const MeScreen(),
     ),
   ],
 );
