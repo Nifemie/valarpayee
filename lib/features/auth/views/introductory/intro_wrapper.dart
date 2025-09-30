@@ -24,21 +24,21 @@ class _IntroductoryScreenState extends State<IntroductoryScreen> {
     IntroPageData(
       title: 'Save, Invest & Grow',
       description:
-          'Unlock savings, savings, investments, and rewards built for everyday life',
+      'Unlock savings, savings, investments, and rewards built for everyday life',
       imagePath: 'assets/images/intro2.png',
       icon: Icons.savings,
     ),
     IntroPageData(
       title: 'All Your Services, One App',
       description:
-          'Manage finances, send cash and manage your finances all at your fingertips',
+      'Manage finances, send cash and manage your finances all at your fingertips',
       imagePath: 'assets/images/intro3.png',
       icon: Icons.apps,
     ),
     IntroPageData(
       title: 'Power Your Business with Ease',
       description:
-          'Get best service POS solutions to accept payments and manage sales',
+      'Get best service POS solutions to accept payments and manage sales',
       imagePath: 'assets/images/intro4.png',
       icon: Icons.payment,
     ),
@@ -102,36 +102,38 @@ class _IntroductoryScreenState extends State<IntroductoryScreen> {
               value: (index + 1) / _pages.length,
               backgroundColor: Colors.grey.shade200,
               valueColor:
-                  const AlwaysStoppedAnimation<Color>(appTheme.primaryColor),
+              const AlwaysStoppedAnimation<Color>(appTheme.primaryColor),
             ),
           ),
 
           // Main illustration
           Expanded(
             flex: 3,
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Image.asset(
-                pageData.imagePath,
-                fit: BoxFit.contain,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Center(
-                      child: Icon(
-                        pageData.icon,
-                        size: 120,
-                        color: appTheme.primaryColor,
+            child: Center( // Added Center widget here
+              child: Container(
+                // Removed width: double.infinity
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Image.asset(
+                  pageData.imagePath,
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                    ),
-                  );
-                },
+                      child: Center(
+                        child: Icon(
+                          pageData.icon,
+                          size: 120,
+                          color: appTheme.primaryColor,
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ),
@@ -139,30 +141,27 @@ class _IntroductoryScreenState extends State<IntroductoryScreen> {
           const SizedBox(height: 40),
 
           // Title and description
-          Expanded(
-            flex: 1,
-            child: Column(
-              children: [
-                Text(
-                  pageData.title,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
+          Column(
+            children: [
+              Text(
+                pageData.title,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
-                const SizedBox(height: 16),
-                Text(
-                  pageData.description,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey.shade600,
-                    height: 1.5,
-                  ),
-                  textAlign: TextAlign.center,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                pageData.description,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey.shade600,
+                  height: 1.5,
                 ),
-              ],
-            ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
 
           const SizedBox(height: 40),

@@ -22,7 +22,11 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const Homescreen(),
+      builder: (context, state) => const Homescreen(
+        firstName: 'John',
+        profileImageUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
+        balance: '1000',
+      ),
     ),
     GoRoute(
       path: '/intro',
@@ -58,7 +62,9 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/signup-success',
-      builder: (context, state) => const SignupSuccessScreen(),
+      builder: (context, state) => SignupSuccessScreen(
+        firstName: state.extra as String? ?? 'User',
+      ),
     ),
     GoRoute(
       path: '/intro5',

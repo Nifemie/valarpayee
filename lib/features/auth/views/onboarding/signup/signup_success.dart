@@ -4,7 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:valarpayee/core/utils/color_utils.dart';
 
 class SignupSuccessScreen extends StatelessWidget {
-  const SignupSuccessScreen({super.key});
+  final String firstName;
+  const SignupSuccessScreen({super.key, required this.firstName});
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +36,9 @@ class SignupSuccessScreen extends StatelessWidget {
               const SizedBox(height: 48),
 
               // Success Message
-              const Text(
-                'Congratulations! You\'ve successfully created your account',
-                style: TextStyle(
+              Text(
+                'Congratulations, $firstName! You\'ve successfully created your account',
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,

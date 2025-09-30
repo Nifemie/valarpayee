@@ -166,12 +166,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Simulate login attempt
-                      setState(() {
-                        _hasIncorrectPassword = true;
-                      });
-                      // In real app, navigate to biometric screen on success
-                      // context.go('/biometric-login');
+                      context.go('/');
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -241,7 +236,7 @@ class _SignInScreenState extends State<SignInScreen> {
           style: TextStyle(
             fontSize: 14.sp,
             fontWeight: FontWeight.w500,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
         SizedBox(height: 8.h),
@@ -296,7 +291,7 @@ class _SignInScreenState extends State<SignInScreen> {
           style: TextStyle(
             fontSize: 14.sp,
             fontWeight: FontWeight.w500,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
         SizedBox(height: 8.h),
