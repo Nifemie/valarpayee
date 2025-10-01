@@ -1,23 +1,25 @@
-import '../../features/dashboard/view/me.dart';
 import 'package:go_router/go_router.dart';
-import '../../features/dashboard/view/homescreen.dart';
 import '../../features/auth/views/introductory/intro_wrapper.dart';
-import '../../features/auth/views/onboarding/signup/signup.dart';
-import '../../features/auth/views/onboarding/signup/personal_details.dart';
+import '../../features/auth/views/onboarding/change_password.dart';
+import '../../features/auth/views/onboarding/forgot_password.dart';
+import '../../features/auth/views/onboarding/signin/biometric_login.dart';
+import '../../features/auth/views/onboarding/signin/passcode_login.dart';
+import '../../features/auth/views/onboarding/signin/signin.dart';
+import '../../features/auth/views/onboarding/signin/verify_fingerprint.dart';
 import '../../features/auth/views/onboarding/signup/business_details.dart';
 import '../../features/auth/views/onboarding/signup/email_password.dart';
-import '../../features/auth/views/onboarding/signup/verify_email.dart';
+import '../../features/auth/views/onboarding/signup/personal_details.dart';
 import '../../features/auth/views/onboarding/signup/phone_number.dart';
-import '../../features/auth/views/onboarding/signup/verify_phone.dart';
+import '../../features/auth/views/onboarding/signup/signup.dart';
 import '../../features/auth/views/onboarding/signup/signup_success.dart';
-import '../../features/auth/views/introductory/intro_screen_5.dart';
-import '../../features/auth/views/onboarding/signin/signin.dart';
-import '../../features/auth/views/onboarding/signin/biometric_login.dart';
-import '../../features/auth/views/onboarding/signin/verify_fingerprint.dart';
-import '../../features/auth/views/onboarding/signin/passcode_login.dart';
-import '../../features/auth/views/onboarding/forgot_password.dart';
-import '../../features/auth/views/onboarding/change_password.dart';
+import '../../features/auth/views/onboarding/signup/verify_email.dart';
+import '../../features/auth/views/onboarding/signup/verify_phone.dart';
 import '../../features/auth/views/splashscreen/splashscreen.dart';
+import '../../features/dashboard/view/card.dart';
+import '../../features/dashboard/view/homescreen.dart';
+import '../../features/dashboard/view/invest.dart';
+import '../../features/dashboard/view/me.dart';
+import '../../features/dashboard/view/savings.dart';
 
 final router = GoRouter(
   initialLocation: '/splash',
@@ -38,7 +40,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/intro',
-      builder: (context, state) => const IntroductoryScreen(),
+      builder: (context, state) => const WelcomeScreen(),
     ),
     GoRoute(
       path: '/signup',
@@ -75,10 +77,6 @@ final router = GoRouter(
       ),
     ),
     GoRoute(
-      path: '/intro5',
-      builder: (context, state) => const IntroScreen5(),
-    ),
-    GoRoute(
       path: '/signin',
       pageBuilder: (context, state) => const NoTransitionPage(
         child: SignInScreen(),
@@ -105,8 +103,20 @@ final router = GoRouter(
       builder: (context, state) => const ChangePasswordScreen(),
     ),
     GoRoute(
-      path: '/me', // New route for MeScreen
+      path: '/me',
       builder: (context, state) => const MeScreen(),
+    ),
+    GoRoute(
+      path: '/finance',
+      builder: (context, state) => const InvestmentsComingSoonScreen(),
+    ),
+    GoRoute(
+      path: '/cards',
+      builder: (context, state) => const CardScreen(),
+    ),
+    GoRoute(
+      path: '/invest',
+      builder: (context, state) => const SavingsComingSoonScreen(),
     ),
   ],
 );

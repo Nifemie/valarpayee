@@ -43,9 +43,9 @@ class AppTheme {
         brightness: Brightness.dark,
       ),
       useMaterial3: true,
-      scaffoldBackgroundColor: Colors.black,
-      appBarTheme: AppBarTheme(
-        backgroundColor: Colors.black,
+      scaffoldBackgroundColor: const Color(0xFF011131),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color(0xFF011131),
         foregroundColor: Colors.white,
         elevation: 0,
       ),

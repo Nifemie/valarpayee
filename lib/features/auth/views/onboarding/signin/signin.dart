@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:valarpayee/core/utils/platform_responsive.dart';
-import 'package:valarpayee/features/auth/widgets/need_help_modal.dart';
-import 'package:valarpayee/core/utils/color_utils.dart';
+import '../../../../../core/utils/platform_responsive.dart';
+import '../../../../../../features/auth/widgets/need_help_modal.dart';
+import '../../../../../../core/utils/color_utils.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -24,6 +24,10 @@ class _SignInScreenState extends State<SignInScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        leading: IconButton(
+          onPressed: () => context.go('/intro'),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+        ),
         actions: [
           TextButton(
             onPressed: () {
@@ -100,7 +104,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       _buildTextField(
                         controller: _emailController,
                         label: 'Email Address',
-                        hint: '0000000000',
+                        hint: 'emai@gmail.com',
                         keyboardType: TextInputType.emailAddress,
                       ),
                       SizedBox(height: 24.h),
@@ -109,7 +113,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       _buildPasswordField(
                         controller: _passwordController,
                         label: 'Password',
-                        hint: 'Benin City',
+                        hint: '*********',
                         obscureText: _obscurePassword,
                         onToggleVisibility: () {
                           setState(() {

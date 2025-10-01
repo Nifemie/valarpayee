@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:valarpayee/core/utils/color_utils.dart';
-import 'package:valarpayee/features/auth/widgets/need_help_modal.dart';
+import '../../../../../core/utils/color_utils.dart';
+import '../../../../../features/auth/widgets/need_help_modal.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -301,8 +301,8 @@ class _SignupScreenState extends State<SignupScreen> {
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => context.go('/intro'),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
         ),
         actions: [
           TextButton(
@@ -518,3 +518,4 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 }
+

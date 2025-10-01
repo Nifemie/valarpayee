@@ -60,34 +60,37 @@ class _HomeScreenTopState extends State<Homescreen> {
       bottomNavigationBar: const CustomBottomNavBar(),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-          children: [
-            // Custom AppBar
-            _buildAppBar(),
-            const SizedBox(height: 16),
-            // Balance Card
-            _buildBalanceCard(),
-            const SizedBox(height: 16),
-            const PaymentWidget(),
-            const SizedBox(height: 16),
-            const KYCWidget(),
-            const SizedBox(height: 16),
-            Image.asset(_currentBannerImage), // Use the state variable here
-            const SizedBox(height: 16),
-            const OurServicesWidget(),
-            const SizedBox(height: 16),
-          ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              children: [
+                // Custom AppBar
+                _buildAppBar(),
+                const SizedBox(height: 16),
+                // Balance Card
+                _buildBalanceCard(),
+                const SizedBox(height: 16),
+                const PaymentWidget(),
+                const SizedBox(height: 16),
+                const KYCWidget(),
+                const SizedBox(height: 16),
+                Image.asset(_currentBannerImage), // Use the state variable here
+                const SizedBox(height: 16),
+                const OurServicesWidget(),
+                const SizedBox(height: 16),
+              ],
+            ),
+          ),
         ),
-      )
       )
     );
   }
 
   Widget _buildAppBar() {
     return Container(
-      color: Colors.black, // Explicitly set app bar background to black
+      color: Theme.of(context).scaffoldBackgroundColor, // Explicitly set app bar background to black
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
         child: Row(
         children: [
           // Profile Picture
@@ -166,7 +169,6 @@ class _HomeScreenTopState extends State<Homescreen> {
 
   Widget _buildBalanceCard() {
     return Container(
-      width: 335,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),

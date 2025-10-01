@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen>
     // Background color animation (black to orange)
     _backgroundAnimation = ColorTween(
       begin: const Color(0xFF000000),
-      end: const Color(0xFF000000),
+      end: const Color(0xFFF76301),
     ).animate(CurvedAnimation(
       parent: _backgroundController,
       curve: Curves.easeInOut,
@@ -151,7 +151,7 @@ class _SplashScreenState extends State<SplashScreen>
                           _borderRadiusAnimation.value,
                         ),
                         child: Image.asset(
-                          'assets/images/logo.png',
+                          'assets/images/newlogo.png',
                           width: _scaleAnimation.value * 0.5,
                           height: _scaleAnimation.value * 0.5,
                           fit: BoxFit.contain,
@@ -184,3 +184,4 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 }
+
