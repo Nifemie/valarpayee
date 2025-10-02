@@ -20,8 +20,8 @@ class SignupSuccessScreen extends StatelessWidget {
 
               // Success Icon
               Container(
-                width: 120.w,
-                height: 120.h,
+                width: 80.h,
+                height: 80.h,
                 decoration: BoxDecoration(
                   color: Colors.green,
                   borderRadius: BorderRadius.circular(60.r),
@@ -29,17 +29,17 @@ class SignupSuccessScreen extends StatelessWidget {
                 child: Icon(
                   Icons.check,
                   color: Colors.white,
-                  size: 60.sp,
+                  size: 30.sp,
                 ),
               ),
 
-              const SizedBox(height: 48),
+              const SizedBox(height: 35),
 
               // Success Message
               Text(
                 'Congratulations, $firstName! You\'ve successfully created your account',
                 style: const TextStyle(
-                  fontSize: 24,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:valarpayee/core/utils/platform_responsive.dart';
 import '../../../../../core/utils/color_utils.dart';
 import '../../../../../features/auth/widgets/need_help_modal.dart';
 
@@ -14,7 +15,7 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   String selectedAccountType = 'Personal';
   String selectedCurrency = 'NGN';
-  String selectedAirline = 'Schedule Airline';
+  String selectedAccountPurpose = 'Personal Banking';
 
   void _showAccountTypeDialog() {
     showDialog(
@@ -31,22 +32,12 @@ class _SignupScreenState extends State<SignupScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.arrow_back),
-                      padding: EdgeInsets.zero,
-                    ),
-                    const SizedBox(width: 8),
-                    const Text(
-                      'Choose Account Type',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
+                const Text(
+                  'Choose Account Type',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 24),
                 _buildAccountTypeOption(
@@ -95,28 +86,17 @@ class _SignupScreenState extends State<SignupScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.arrow_back),
-                      padding: EdgeInsets.zero,
-                    ),
-                    const SizedBox(width: 8),
-                    const Text(
-                      'Choose Currency Type',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
+                const Text(
+                  'Choose Currency Type',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 24),
                 _buildCurrencyOption(
                   '🇳🇬',
                   'NGN',
-                  'For transactions in Naira',
                   selectedCurrency == 'NGN',
                   () {
                     setState(() {
@@ -129,7 +109,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 _buildCurrencyOption(
                   '🇺🇸',
                   'USD',
-                  'For transactions in US Dollars',
                   selectedCurrency == 'USD',
                   () {
                     setState(() {
@@ -142,7 +121,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 _buildCurrencyOption(
                   '🇬🇧',
                   'GBP',
-                  'For transactions in Pounds',
                   selectedCurrency == 'GBP',
                   () {
                     setState(() {
@@ -155,7 +133,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 _buildCurrencyOption(
                   '🇪🇺',
                   'EUR',
-                  'For transactions in Euros',
                   selectedCurrency == 'EUR',
                   () {
                     setState(() {
@@ -165,6 +142,98 @@ class _SignupScreenState extends State<SignupScreen> {
                   },
                 ),
               ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showAccountPurposeDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(24),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Choose Account Purpose',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  _buildAccountPurposeOption(
+                    'Personal Banking',
+                    'Everyday transactions and savings',
+                    selectedAccountPurpose == 'Personal Banking',
+                    () {
+                      setState(() {
+                        selectedAccountPurpose = 'Personal Banking';
+                      });
+                      Navigator.pop(context);
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  _buildAccountPurposeOption(
+                    'Business Operations',
+                    'Company transactions and payroll',
+                    selectedAccountPurpose == 'Business Operations',
+                    () {
+                      setState(() {
+                        selectedAccountPurpose = 'Business Operations';
+                      });
+                      Navigator.pop(context);
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  _buildAccountPurposeOption(
+                    'Investment & Trading',
+                    'Stock trading and investment portfolio',
+                    selectedAccountPurpose == 'Investment & Trading',
+                    () {
+                      setState(() {
+                        selectedAccountPurpose = 'Investment & Trading';
+                      });
+                      Navigator.pop(context);
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  _buildAccountPurposeOption(
+                    'International Transfers',
+                    'Cross-border payments and remittances',
+                    selectedAccountPurpose == 'International Transfers',
+                    () {
+                      setState(() {
+                        selectedAccountPurpose = 'International Transfers';
+                      });
+                      Navigator.pop(context);
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  _buildAccountPurposeOption(
+                    'Savings & Goals',
+                    'Long-term savings and financial goals',
+                    selectedAccountPurpose == 'Savings & Goals',
+                    () {
+                      setState(() {
+                        selectedAccountPurpose = 'Savings & Goals';
+                      });
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -228,7 +297,6 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget _buildCurrencyOption(
     String flag,
     String currency,
-    String subtitle,
     bool isSelected,
     VoidCallback onTap,
   ) {
@@ -271,6 +339,51 @@ class _SignupScreenState extends State<SignupScreen> {
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),
+                  )
+                ],
+              ),
+            ),
+            Radio<String>(
+              value: currency,
+              groupValue: isSelected ? currency : null,
+              onChanged: (value) => onTap(),
+              activeColor: Colors.green,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAccountPurposeOption(
+    String title,
+    String subtitle,
+    bool isSelected,
+    VoidCallback onTap,
+  ) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: isSelected ? appTheme.primaryColor : Colors.grey.shade300,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -284,10 +397,10 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             Radio<String>(
-              value: currency,
-              groupValue: isSelected ? currency : null,
+              value: title,
+              groupValue: isSelected ? title : null,
               onChanged: (value) => onTap(),
-              activeColor: Colors.green,
+              activeColor: appTheme.primaryColor,
             ),
           ],
         ),
@@ -327,22 +440,15 @@ class _SignupScreenState extends State<SignupScreen> {
             // ValarPayee Logo
             Row(
               children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: appTheme.primaryColor,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Icon(
-                    Icons.account_balance_wallet,
-                    color: Colors.white,
-                    size: 24,
-                  ),
-                ),
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      'assets/images/newlogo.png',
+                      height: 40.rsp,
+                    )),
                 const SizedBox(width: 12),
                 const Text(
-                  'ValarPayee',
+                  'ValarPay',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -445,40 +551,43 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             const SizedBox(height: 24),
 
-            // Airline Dropdown
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade300),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: const Icon(
-                      Icons.flight,
-                      size: 16,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      selectedAirline,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+            // Account Purpose Dropdown
+            GestureDetector(
+              onTap: _showAccountPurposeDialog,
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: const Icon(
+                        Icons.wallet,
+                        size: 16,
+                        color: Colors.grey,
                       ),
                     ),
-                  ),
-                  const Icon(Icons.keyboard_arrow_down),
-                ],
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        selectedAccountPurpose,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    const Icon(Icons.keyboard_arrow_down),
+                  ],
+                ),
               ),
             ),
 
@@ -518,4 +627,3 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 }
-

@@ -34,7 +34,8 @@ final router = GoRouter(
       path: '/',
       builder: (context, state) => const Homescreen(
         firstName: 'John',
-        profileImageUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
+        profileImageUrl:
+            'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
         balance: '1000',
       ),
     ),
@@ -60,7 +61,9 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/verify-email',
-      builder: (context, state) => const VerifyEmailScreen(),
+      builder: (context, state) => VerifyEmailScreen(
+        emailAddress: state.uri.queryParameters['email'] ?? '',
+      ),
     ),
     GoRoute(
       path: '/phone-number',
@@ -68,7 +71,9 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/verify-phone',
-      builder: (context, state) => const VerifyPhoneScreen(),
+      builder: (context, state) => VerifyPhoneScreen(
+        phoneNumber: state.uri.queryParameters['phone'] ?? '',
+      ),
     ),
     GoRoute(
       path: '/signup-success',

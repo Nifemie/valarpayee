@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import '/core/themes/color_utils.dart';
 
@@ -16,8 +15,9 @@ class AppTheme {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
+        surfaceTintColor: Colors.white,
       ),
-      bottomAppBarTheme: const BottomAppBarTheme(
+      bottomAppBarTheme: const BottomAppBarThemeData(
         color: Colors.white,
       ),
       cardColor: Colors.grey[200],
@@ -43,13 +43,14 @@ class AppTheme {
         brightness: Brightness.dark,
       ),
       useMaterial3: true,
-      scaffoldBackgroundColor: const Color(0xFF011131),
+      scaffoldBackgroundColor: const Color(0xFF000000),
       appBarTheme: const AppBarTheme(
-        backgroundColor: Color(0xFF011131),
+        backgroundColor: Colors.black,
         foregroundColor: Colors.white,
         elevation: 0,
+        surfaceTintColor: Colors.black,
       ),
-      bottomAppBarTheme: const BottomAppBarTheme(
+      bottomAppBarTheme: const BottomAppBarThemeData(
         color: Color(0xFF2A2A2A),
       ),
       cardColor: const Color(0xFF2B2725),

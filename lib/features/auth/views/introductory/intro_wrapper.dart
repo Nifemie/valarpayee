@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:valarpayee/core/utils/color_utils.dart';
+import 'package:valarpayee/core/themes/color_utils.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -21,6 +20,26 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     'assets/images/intro2.png',
     'assets/images/intro3.png',
     'assets/images/intro4.png',
+  ];
+
+  final List<Map<String, String>> _slideContent = [
+    {
+      'title': 'Simple Banking',
+      'description': 'Easy banking for everyone across\nall platforms',
+    },
+    {
+      'title': 'Secure Payments',
+      'description': 'Safe and secure transactions\nwith advanced encryption',
+    },
+    {
+      'title': 'Quick Transfers',
+      'description': 'Send money instantly to anyone\nanywhere in the world',
+    },
+    {
+      'title': 'Smart Savings',
+      'description':
+          'Grow your money with intelligent\nsavings and investment options',
+    },
   ];
 
   @override
@@ -55,95 +74,145 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
+        body: SafeArea(
+      child: Column(
         children: [
-          // Background Image Carousel
-          PageView.builder(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                _currentPage = index;
-              });
-            },
-            itemCount: _backgroundImages.length,
-            itemBuilder: (context, index) {
-              return Image.asset(
-                _backgroundImages[index],
-                fit: BoxFit.cover,
-              );
-            },
-          ),
-
-          // Gradient Overlay
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.black.withOpacity(0.3), // Light overlay at top
-                  Colors.black.withOpacity(0.7), // Darker at bottom
+          // Image Container with Shadow
+          Expanded(
+            flex: 3,
+            child: Container(
+              margin: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.6),
+                    blurRadius: 30,
+                    spreadRadius: 5,
+                    offset: const Offset(0, 15),
+                  ),
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.3),
+                    blurRadius: 60,
+                    spreadRadius: 10,
+                    offset: const Offset(0, 25),
+                  ),
                 ],
-                stops: const [0.3, 1.0],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    // Background Image Carousel
+                    PageView.builder(
+                      controller: _pageController,
+                      onPageChanged: (index) {
+                        setState(() {
+                          _currentPage = index;
+                        });
+                      },
+                      itemCount: _backgroundImages.length,
+                      itemBuilder: (context, index) {
+                        return Image.asset(
+                          _backgroundImages[index],
+                          fit: BoxFit.cover,
+                        );
+                      },
+                    ),
+
+                    // Gradient Overlay
+                    Align(
+                      alignment: AlignmentGeometry.bottomCenter,
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.3,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.transparent,
+                              Colors.black.withValues(alpha: 0.2),
+                              Colors.black.withValues(alpha: 0.6),
+                              Colors.black.withValues(alpha: 1),
+                            ],
+                            stops: const [0.0, 0.3, 0.7, 1.0],
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              _slideContent[_currentPage]['title']!,
+                              style: const TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: 16),
+                            Text(
+                              _slideContent[_currentPage]['description']!,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                height: 1.5,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: 16),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    // Text Overlay on Image
+                    Positioned(
+                      bottom: 0,
+                      left: 20,
+                      right: 20,
+                      child: Column(
+                        children: [
+                          // Page Indicators (dots)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(
+                              _backgroundImages.length,
+                              (index) => Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 4),
+                                width: _currentPage == index ? 8 : 6,
+                                height: _currentPage == index ? 8 : 6,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: _currentPage == index
+                                      ? Colors.white
+                                      : Colors.white.withValues(alpha: 0.4),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
 
-          // Content
-          SafeArea(
+          // Shadow overlay extending from image
+
+          // Bottom Content Section
+          Expanded(
+            flex: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Page Indicators (dots)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      _backgroundImages.length,
-                          (index) => Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 4),
-                        width: _currentPage == index ? 8 : 6,
-                        height: _currentPage == index ? 8 : 6,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: _currentPage == index
-                              ? Colors.white
-                              : Colors.white.withOpacity(0.4),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 40),
-
-                  // Title
-                  const Text(
-                    'Simple Banking',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // Description
-                  const Text(
-                    'Easy banking for everyone across\nall platforms',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      height: 1.5,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-
-                  const SizedBox(height: 40),
-
                   // Sign Up Button
                   SizedBox(
                     width: double.infinity,
@@ -152,10 +221,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         context.go('/signup');
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF011131), // Bright blue
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        backgroundColor: AppColors.primaryColor,
+                        padding: const EdgeInsets.symmetric(vertical: 20),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(25),
                         ),
                         elevation: 0,
                       ),
@@ -198,29 +267,31 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 16),
-
                   // Get Help
-                  TextButton(
-                    onPressed: () {
-                      // Handle get help
-                    },
-                    child: const Text(
-                      'Get Help',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
 
-                  const SizedBox(height: 20),
+                  // const SizedBox(height: 16),
+
+                  // // Get Help
+                  // TextButton(
+                  //   onPressed: () {
+                  //     // Handle get help
+                  //   },
+                  //   child: const Text(
+                  //     'Get Help',
+                  //     style: TextStyle(
+                  //       fontSize: 14,
+                  //       color: Colors.white,
+                  //     ),
+                  //   ),
+                  // ),
+
+                  // const SizedBox(height: 20),
                 ],
               ),
             ),
           ),
         ],
       ),
-    );
+    ));
   }
 }

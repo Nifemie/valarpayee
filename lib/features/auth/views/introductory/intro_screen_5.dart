@@ -38,7 +38,7 @@ class IntroScreen5 extends StatelessWidget {
                         color: appTheme.primaryColor,
                         borderRadius: BorderRadius.circular(16),
                         image: const DecorationImage(
-                          image: AssetImage('assets/images/valar.png'),
+                          image: AssetImage('assets/images/newlogo.png'),
                           fit: BoxFit.cover,
                         ),
                       ),

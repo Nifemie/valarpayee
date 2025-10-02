@@ -58,13 +58,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     height: 40.rh,
                     decoration: BoxDecoration(
                       color: appTheme.primaryColor,
-                      borderRadius: PlatformResponsive.circular(8),
+                      borderRadius: PlatformResponsive.circular(16),
                     ),
-                    child: Icon(
-                      Icons.account_balance_wallet,
-                      color: Colors.white,
-                      size: 24.rsp,
-                    ),
+                    child: Image.asset('assets/images/newlogo.png', height: 24.rsp,)
                   ),
                   PlatformResponsive.sizedBoxW(12),
                   Text(

@@ -24,7 +24,7 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
         elevation: 0,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back),
         ),
       ),
       body: Padding(
@@ -34,27 +34,27 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Email Address & Password',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Create your email address and a strong password to secure your account',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey.shade600,
-                ),
-              ),
-              const SizedBox(height: 32),
-
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const Text(
+                        'Email Address & Password',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Create your email address and a strong password to secure your account',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey.shade600,
+                        ),
+                      ),
+                      const SizedBox(height: 24),
                       // Email Address
                       _buildTextField(
                         controller: _emailController,
@@ -62,7 +62,7 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
                         hint: 'Enter your email address',
                         keyboardType: TextInputType.emailAddress,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 10),
 
                       // Password
                       _buildPasswordField(
@@ -96,7 +96,7 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      // const SizedBox(height: 16),
 
                       // Confirm Password
                       _buildPasswordField(
@@ -134,6 +134,7 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
 
                       // Terms and conditions
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -157,6 +158,8 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           GestureDetector(
                             onTap: () {},
@@ -202,7 +205,8 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      context.go('/verify-email');
+                      context
+                          .go('/verify-email?email=${_emailController.text}');
                     }
                   },
                   style: ElevatedButton.styleFrom(

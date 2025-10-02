@@ -24,7 +24,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         elevation: 0,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back),
         ),
       ),
       body: Padding(
@@ -34,27 +34,27 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Personal Details',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Provide your personal information to create your account',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey.shade600,
-                ),
-              ),
-              const SizedBox(height: 32),
-
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const Text(
+                        'Personal Details',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Provide your personal information to create your account',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey.shade600,
+                        ),
+                      ),
+                      const SizedBox(height: 24),
                       // First Name
                       _buildTextField(
                         controller: _firstNameController,
@@ -98,13 +98,14 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                         controller: _addressController,
                         label: 'Address',
                         hint: 'Enter your address',
-                        maxLines: 3,
+                        maxLines: 2,
                       ),
                       const SizedBox(height: 24),
 
                       // Terms and conditions
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             'By clicking Continue, you agree to our ',
@@ -127,6 +128,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             'and ',
@@ -244,6 +247,11 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
             }
             return null;
           },
+          onChanged: (value) {
+            if (value.isNotEmpty) {
+              _formKey.currentState!.validate();
+            }
+          },
         ),
       ],
     );
@@ -262,6 +270,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         _dobController.text =
             '${picked.day.toString().padLeft(2, '0')}/${picked.month.toString().padLeft(2, '0')}/${picked.year}';
       });
+      _formKey.currentState!.validate();
     }
   }
 
@@ -281,6 +290,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     _genderController.text = 'Male';
                   });
                   Navigator.pop(context);
+                  _formKey.currentState!.validate();
                 },
               ),
               ListTile(
@@ -290,6 +300,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     _genderController.text = 'Female';
                   });
                   Navigator.pop(context);
+                  _formKey.currentState!.validate();
                 },
               ),
               ListTile(
@@ -299,6 +310,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     _genderController.text = 'Other';
                   });
                   Navigator.pop(context);
+                  _formKey.currentState!.validate();
                 },
               ),
             ],

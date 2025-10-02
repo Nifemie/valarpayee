@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:valarpayee/core/utils/color_utils.dart';
 
 class PhoneNumberScreen extends StatefulWidget {
@@ -12,7 +13,18 @@ class PhoneNumberScreen extends StatefulWidget {
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   final _formKey = GlobalKey<FormState>();
   final _phoneController = TextEditingController();
-  String _selectedCountryCode = '+234';
+  Country _selectedCountry = Country(
+    phoneCode: '234',
+    countryCode: 'NG',
+    e164Sc: 0,
+    geographic: true,
+    level: 1,
+    name: 'Nigeria',
+    example: '8021234567',
+    displayName: 'Nigeria (NG) [+234]',
+    displayNameNoCountryCode: 'Nigeria (NG)',
+    e164Key: '',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -64,39 +76,38 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                   Row(
                     children: [
                       // Country Code Selector
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 12),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade300),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              width: 24,
-                              height: 24,
-                              decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(4),
+                      GestureDetector(
+                        onTap: _showCountryPicker,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 10),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade300),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                _selectedCountry.flagEmoji,
+                                style: const TextStyle(fontSize: 20),
                               ),
-                              child: const Center(
-                                child: Text(
-                                  '🇳🇬',
-                                  style: TextStyle(fontSize: 16),
+                              const SizedBox(width: 8),
+                              Text(
+                                '+${_selectedCountry.phoneCode}',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
-                            ),
-                            const SizedBox(width: 8),
-                            Text(
-                              _selectedCountryCode,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
+                              const SizedBox(width: 4),
+                              const Icon(
+                                Icons.keyboard_arrow_down,
+                                size: 20,
+                                color: Colors.grey,
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -107,7 +118,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                           controller: _phoneController,
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
-                            hintText: '0000000000',
+                            hintText: '0123 4567',
                             hintStyle: TextStyle(
                               color: Colors.grey.shade400,
                               fontSize: 14,
@@ -128,17 +139,17 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                   color: appTheme.primaryColor),
                             ),
                             contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 12),
+                                horizontal: 12, vertical: 12),
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Phone number is required';
-                            }
-                            if (value.length < 10) {
-                              return 'Please enter a valid phone number';
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value == null || value.isEmpty) {
+                          //     return 'Phone number is required';
+                          //   }
+                          //   if (value.length < 10) {
+                          //     return 'Please enter a valid phone number';
+                          //   }
+                          //   return null;
+                          // },
                         ),
                       ),
                     ],
@@ -222,7 +233,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      context.go('/verify-phone');
+                      context.go(
+                          '/verify-phone?phone=${_selectedCountry.phoneCode} ${_phoneController.text}');
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -243,6 +255,38 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showCountryPicker() {
+    showCountryPicker(
+      context: context,
+      showPhoneCode: true,
+      useSafeArea: true,
+      onSelect: (Country country) {
+        setState(() {
+          _selectedCountry = country;
+        });
+      },
+      countryListTheme: CountryListThemeData(
+        flagSize: 23,
+        textStyle: const TextStyle(fontSize: 16),
+        bottomSheetHeight: 500,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+        inputDecoration: InputDecoration(
+          hintText: 'Search Country',
+          prefixIcon: const Icon(Icons.search),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: const Color(0xFF8C98A8).withValues(alpha: 0.2),
+            ),
           ),
         ),
       ),

@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:valarpayee/core/utils/color_utils.dart';
 
 class VerifyPhoneScreen extends StatefulWidget {
-  const VerifyPhoneScreen({super.key});
+  final String phoneNumber;
+  const VerifyPhoneScreen({required this.phoneNumber, super.key});
 
   @override
   State<VerifyPhoneScreen> createState() => _VerifyPhoneScreenState();
@@ -13,6 +15,45 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
   final List<TextEditingController> _controllers =
       List.generate(4, (index) => TextEditingController());
   final List<FocusNode> _focusNodes = List.generate(4, (index) => FocusNode());
+
+  Timer? _timer;
+  int _countdown = 30;
+  bool _canResend = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _startCountdown();
+  }
+
+  void _startCountdown() {
+    setState(() {
+      _countdown = 30;
+      _canResend = false;
+    });
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_countdown > 0) {
+          _countdown--;
+        } else {
+          _canResend = true;
+          _timer?.cancel();
+        }
+      });
+    });
+  }
+
+  void _resendCode() {
+    // Add your resend code logic here
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Verification code sent!'),
+        backgroundColor: Colors.green,
+      ),
+    );
+    _startCountdown();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +81,14 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Enter the code we sent to +234 0000000000',
+              'Enter the code we sent to ${widget.phoneNumber}',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey.shade600,
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 80),
+            const SizedBox(height: 40),
 
             // OTP Input Fields
             Row(
@@ -72,18 +113,14 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(
-                          color: index == 1 || index == 2
-                              ? appTheme.primaryColor
-                              : Colors.grey.shade300,
+                          color: Colors.grey.shade300,
                           width: 2,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(
-                          color: index == 1 || index == 2
-                              ? appTheme.primaryColor
-                              : Colors.grey.shade300,
+                          color: Colors.grey.shade300,
                           width: 2,
                         ),
                       ),
@@ -108,7 +145,7 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
               }),
             ),
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 25),
 
             // Didn't receive code
             Row(
@@ -122,14 +159,16 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    // Resend code logic
-                  },
-                  child: const Text(
-                    'Resend in 50 seconds',
+                  onTap: _canResend ? _resendCode : null,
+                  child: Text(
+                    _canResend
+                        ? 'Resend Code'
+                        : 'Resend in $_countdown seconds',
                     style: TextStyle(
                       fontSize: 14,
-                      color: appTheme.primaryColor,
+                      color: _canResend
+                          ? appTheme.primaryColor
+                          : Colors.grey.shade400,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -184,17 +223,8 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    // Pre-fill some fields to match the design
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _controllers[1].text = '1';
-      _controllers[2].text = '2';
-    });
-  }
-
-  @override
   void dispose() {
+    _timer?.cancel();
     for (var controller in _controllers) {
       controller.dispose();
     }

@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:valarpayee/core/utils/color_utils.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
-  const VerifyEmailScreen({super.key});
+  final String emailAddress;
+  const VerifyEmailScreen({required this.emailAddress, super.key});
 
   @override
   State<VerifyEmailScreen> createState() => _VerifyEmailScreenState();
@@ -13,6 +15,45 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
   final List<TextEditingController> _controllers =
       List.generate(6, (index) => TextEditingController());
   final List<FocusNode> _focusNodes = List.generate(6, (index) => FocusNode());
+
+  Timer? _timer;
+  int _countdown = 30;
+  bool _canResend = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _startCountdown();
+  }
+
+  void _startCountdown() {
+    setState(() {
+      _countdown = 30;
+      _canResend = false;
+    });
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_countdown > 0) {
+          _countdown--;
+        } else {
+          _canResend = true;
+          _timer?.cancel();
+        }
+      });
+    });
+  }
+
+  void _resendCode() {
+    // Add your resend code logic here
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Verification code sent!'),
+        backgroundColor: Colors.green,
+      ),
+    );
+    _startCountdown();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +79,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Enter the code we sent to [email]@digital.com',
+              'Enter the code we sent to ${widget.emailAddress}',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey.shade600,
@@ -107,14 +148,16 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    // Resend code logic
-                  },
-                  child: const Text(
-                    'Resend in 30 seconds',
+                  onTap: _canResend ? _resendCode : null,
+                  child: Text(
+                    _canResend
+                        ? 'Resend Code'
+                        : 'Resend in $_countdown seconds',
                     style: TextStyle(
                       fontSize: 14,
-                      color: appTheme.primaryColor,
+                      color: _canResend
+                          ? appTheme.primaryColor
+                          : Colors.grey.shade400,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -201,6 +244,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   String otp =
                       _controllers.map((controller) => controller.text).join();
                   if (otp.length == 6) {
+                    
                     context.go('/phone-number');
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -237,6 +281,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
 
   @override
   void dispose() {
+    _timer?.cancel();
     for (var controller in _controllers) {
       controller.dispose();
     }
