@@ -29,7 +29,7 @@ class OurServicesWidget extends StatelessWidget {
           child: Text(
             'Our Services',
             style: TextStyle(
-              color: Color(0xFFF9FAFB),
+              color: Colors.black,
               fontFamily: 'SF Pro',
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -38,7 +38,7 @@ class OurServicesWidget extends StatelessWidget {
           ),
         ),
         Container(
-          padding: const EdgeInsets.fromLTRB(12, 16, 12, 16),
+          padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
           decoration: BoxDecoration(
             color: Theme.of(context).cardColor, // Use theme's cardColor
             borderRadius: BorderRadius.circular(16),
@@ -75,7 +75,7 @@ class OurServicesWidget extends StatelessWidget {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: const Color(0xFF46352B),
+              color: const Color(0xFFF76301),
               borderRadius: BorderRadius.circular(100),
             ),
             child: Center(
@@ -84,7 +84,7 @@ class OurServicesWidget extends StatelessWidget {
                 width: 18,
                 height: 18,
                 colorFilter: const ColorFilter.mode(
-                  Color(0xFFF76301), // Orange color for icons
+                  Colors.white, // Orange color for icons
                   BlendMode.srcIn,
                 ),
               ),
@@ -97,7 +97,7 @@ class OurServicesWidget extends StatelessWidget {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
-              color: Color(0xFFF9FAFB),
+              color: Colors.black,
               fontFamily: 'SF Pro',
               fontSize: 10,
               fontWeight: FontWeight.w400,

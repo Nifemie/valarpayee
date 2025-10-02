@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../core/routing/app_router.dart';
 import '../core/themes/app_theme.dart';
 
-final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
+final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.light);
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});

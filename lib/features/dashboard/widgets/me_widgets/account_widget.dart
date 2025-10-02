@@ -10,7 +10,7 @@ class AccountMenuWidget extends StatelessWidget {
       width: 335,
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFF2B2725),
+        color: Color(0xFF011131),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(

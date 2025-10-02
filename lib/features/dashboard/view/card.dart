@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '/features/dashboard/widgets/navbar.dart';
 
 class CardScreen extends StatelessWidget {
@@ -7,109 +8,120 @@ class CardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        forceMaterialTransparency: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => GoRouter.of(context).pop(),
+        ),
+      ),
       bottomNavigationBar: CustomBottomNavBar(),
-      backgroundColor: const Color(0xFF011131),
+      backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Spacer(),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 32),
 
-              // Card Icon
-              Container(
-                padding: const EdgeInsets.all(32),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFF5722),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Icon(
-                  Icons.credit_card,
-                  size: 80,
-                  color: Colors.white,
-                ),
-              ),
-
-              const SizedBox(height: 32),
-
-              // Title
-              const Text(
-                'Cards Coming Soon',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFFFF5722),
-                ),
-                textAlign: TextAlign.center,
-              ),
-
-              const SizedBox(height: 16),
-
-              // Description
-              const Text(
-                'We\'re building powerful card management\nfeatures to give you complete control over your\nfinances',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.white70,
-                  height: 1.5,
-                ),
-                textAlign: TextAlign.center,
-              ),
-
-              const SizedBox(height: 32),
-
-              // Progress Dots
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 8,
-                    height: 8,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFFFF5722),
-                    ),
+                // Card Icon
+                Container(
+                  padding: const EdgeInsets.all(32),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFF5722),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  const SizedBox(width: 8),
-                  Container(
-                    width: 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white.withOpacity(0.3),
-                    ),
+                  child: const Icon(
+                    Icons.credit_card,
+                    size: 80,
+                    color: Colors.white,
                   ),
-                ],
-              ),
+                ),
 
-              const SizedBox(height: 48),
+                const SizedBox(height: 32),
 
-              // Feature Cards
-              _buildFeatureCard(
-                icon: Icons.credit_card,
-                title: 'Virtual & Physical Cards',
-                iconColor: const Color(0xFFFF5722),
-              ),
+                // Title
+                const Text(
+                  'Cards Coming Soon',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFFF5722),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
 
-              const SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-              _buildFeatureCard(
-                icon: Icons.shield,
-                title: 'Secure Transactions',
-                iconColor: const Color(0xFFFF5722),
-              ),
+                // Description
+                const Text(
+                  'We\'re building powerful card management\nfeatures to give you complete control over your\nfinances',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                    height: 1.5,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
 
-              const SizedBox(height: 16),
+                const SizedBox(height: 32),
 
-              _buildFeatureCard(
-                icon: Icons.settings,
-                title: 'Card Controls',
-                iconColor: const Color(0xFFFF5722),
-              ),
+                // Progress Dots
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xFFFF5722),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
 
-              const Spacer(),
-            ],
+                const SizedBox(height: 48),
+
+                // Feature Cards
+                _buildFeatureCard(
+                  icon: Icons.credit_card,
+                  title: 'Virtual & Physical Cards',
+                  iconColor: const Color(0xFFFF5722),
+                ),
+
+                const SizedBox(height: 16),
+
+                _buildFeatureCard(
+                  icon: Icons.shield,
+                  title: 'Secure Transactions',
+                  iconColor: const Color(0xFFFF5722),
+                ),
+
+                const SizedBox(height: 16),
+
+                _buildFeatureCard(
+                  icon: Icons.settings,
+                  title: 'Card Controls',
+                  iconColor: const Color(0xFFFF5722),
+                ),
+
+                const SizedBox(height: 32),
+              ],
+            ),
           ),
         ),
       ),
@@ -124,10 +136,10 @@ class CardScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        color: const Color(0xFF011131),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Colors.white.withOpacity(0.1),
+          color: Colors.white.withAlpha(26),
           width: 1,
         ),
       ),

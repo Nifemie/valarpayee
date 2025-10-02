@@ -77,7 +77,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       width: 375,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       decoration: const BoxDecoration(
-        color: Colors.black,
+        color: const Color(0xFF011131),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

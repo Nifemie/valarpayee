@@ -10,7 +10,7 @@ class KYCWidget extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: const Color(0xFF2B2725), // Dark mode surface card color
+        color: const Color(0xFF011131), // Dark mode surface card color
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +71,7 @@ class KYCWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: const Color(0x26216EB2), // rgba(33, 110, 178, 0.15)
+              color: Colors.white, // rgba(33, 110, 178, 0.15)
             ),
             child: const Text(
               'Setup',

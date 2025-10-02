@@ -5,8 +5,8 @@ import '../widgets/home_widgets/payment_widget_icons.dart';
 import '../widgets/home_widgets/kyc_widget.dart';
 import '../widgets/home_widgets/ourservice.dart';
 import '/features/dashboard/widgets/navbar.dart';
-import '../../../core/themes/app_theme.dart';
-import 'package:go_router/go_router.dart';
+
+
 
 class Homescreen extends StatefulWidget {
   final String firstName;
@@ -145,7 +145,7 @@ class _HomeScreenTopState extends State<Homescreen> {
             width: 24,
             height: 24,
             colorFilter: const ColorFilter.mode(
-              Color(0xFFF9FAFB),
+              Colors.black,
               BlendMode.srcIn,
             ),
           ),
@@ -271,7 +271,7 @@ class _HomeScreenTopState extends State<Homescreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(24),
-                    color: const Color(0xFF040404), // Main Primary Black (reverted to original)
+                    color: const Color(0xFF011131), // Main Primary Black (reverted to original)
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,

@@ -23,7 +23,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => GoRouter.of(context).pop(),
           icon: const Icon(Icons.arrow_back, color: Colors.black),
         ),
       ),

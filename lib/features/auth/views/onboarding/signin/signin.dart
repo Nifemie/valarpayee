@@ -26,7 +26,7 @@ class _SignInScreenState extends State<SignInScreen> {
         elevation: 0,
         leading: IconButton(
           onPressed: () => context.go('/intro'),
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
         ),
         actions: [
           TextButton(
@@ -43,13 +43,14 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ],
       ),
-      body: Padding(
-        padding: PlatformResponsive.all(24),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: PlatformResponsive.all(24),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
               // ValarPayee Logo
               Row(
                 children: [
@@ -92,76 +93,68 @@ class _SignInScreenState extends State<SignInScreen> {
                 style: TextStyle(
                   fontSize: 16.sp,
                   color: Colors.grey,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 40.h),
 
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      // Email Address
-                      _buildTextField(
-                        controller: _emailController,
-                        label: 'Email Address',
-                        hint: 'emai@gmail.com',
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                      SizedBox(height: 24.h),
+              // Email Address
+              _buildTextField(
+                controller: _emailController,
+                label: 'Email Address',
+                hint: 'emai@gmail.com',
+                keyboardType: TextInputType.emailAddress,
+              ),
+              SizedBox(height: 24.h),
 
-                      // Password
-                      _buildPasswordField(
-                        controller: _passwordController,
-                        label: 'Password',
-                        hint: '*********',
-                        obscureText: _obscurePassword,
-                        onToggleVisibility: () {
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
-                        },
-                        hasError: _hasIncorrectPassword,
-                      ),
-
-                      if (_hasIncorrectPassword) ...[
-                        SizedBox(height: 8.h),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.error_outline,
-                              color: Colors.red,
-                              size: 16,
-                            ),
-                            SizedBox(width: 8.w),
-                            const Text(
-                              'Incorrect password',
-                              style: TextStyle(
-                                color: Colors.red,
-                                fontSize: 12,
-                              ),
-                            ),
-                            const Spacer(),
-                            GestureDetector(
-                              onTap: () {
-                                context.go('/forgot-password');
-                              },
-                              child: const Text(
-                                'Forgot Password?',
-                                style: TextStyle(
-                                  color: appTheme.primaryColor,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
+              // Password
+              _buildPasswordField(
+                controller: _passwordController,
+                label: 'Password',
+                hint: '*********',
+                obscureText: _obscurePassword,
+                onToggleVisibility: () {
+                  setState(() {
+                    _obscurePassword = !_obscurePassword;
+                  });
+                },
+                hasError: _hasIncorrectPassword,
               ),
 
+              if (_hasIncorrectPassword) ...[
+                SizedBox(height: 8.h),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.error_outline,
+                      color: Colors.red,
+                      size: 16,
+                    ),
+                    SizedBox(width: 8.w),
+                    const Text(
+                      'Incorrect password',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 12,
+                      ),
+                    ),
+                    const Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        context.go('/forgot-password');
+                      },
+                      child: const Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          color: appTheme.primaryColor,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
               SizedBox(height: 40.h),
 
               // Login Button
@@ -223,6 +216,7 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ),
       ),
+      )
     );
   }
 
@@ -252,6 +246,7 @@ class _SignInScreenState extends State<SignInScreen> {
             hintStyle: TextStyle(
               color: Colors.grey.shade400,
               fontSize: 14.sp,
+              fontWeight: FontWeight.bold,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.r),
@@ -307,6 +302,7 @@ class _SignInScreenState extends State<SignInScreen> {
             hintStyle: TextStyle(
               color: Colors.grey.shade400,
               fontSize: 14.sp,
+              fontWeight: FontWeight.bold,
             ),
             suffixIcon: IconButton(
               onPressed: onToggleVisibility,

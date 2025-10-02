@@ -7,29 +7,33 @@ class PaymentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: const Color(0xFF2B2725), // Same dark mode surface card color
+        color: Theme.of(context).cardColor, // Same dark mode surface card color
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _buildActionItem(
             svgAssetPath: 'assets/images/payment_wid/valarpay.svg',
             label: 'To ValaPay',
             onTap: () => print('To ValaPay tapped'),
           ),
+
           _buildActionItem(
             svgAssetPath: 'assets/images/payment_wid/Bank.svg',
             label: 'To Bank',
             onTap: () => print('To Bank tapped'),
           ),
+
+
           _buildActionItem(
             svgAssetPath: 'assets/images/payment_wid/withdraw.svg',
             label: 'Withdraw',
             onTap: () => print('Withdraw tapped'),
           ),
+
           _buildActionItem(
             svgAssetPath: 'assets/images/payment_wid/Account.svg',
             label: 'Account',
@@ -71,7 +75,7 @@ class PaymentWidget extends StatelessWidget {
           Text(
             label,
             style: const TextStyle(
-              color: Color(0xFFD1D5DB), // Same secondary text color as KYC widget
+              color: Colors.black, // Same secondary text color as KYC widget
               fontFamily: 'SF Pro',
               fontSize: 12,
               fontWeight: FontWeight.w400,

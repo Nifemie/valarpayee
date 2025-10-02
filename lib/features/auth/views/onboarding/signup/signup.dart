@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/color_utils.dart';
 import '../../../../../features/auth/widgets/need_help_modal.dart';
@@ -104,7 +104,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     const SizedBox(width: 8),
                     const Text(
-                      'Choose Currency Type',
+                      'Choose Currency',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -301,8 +301,8 @@ class _SignupScreenState extends State<SignupScreen> {
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
-          onPressed: () => context.go('/intro'),
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => GoRouter.of(context).pop(),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
         ),
         actions: [
           TextButton(
@@ -490,9 +490,9 @@ class _SignupScreenState extends State<SignupScreen> {
               child: ElevatedButton(
                 onPressed: () {
                   if (selectedAccountType == 'Personal') {
-                    context.go('/personal-details');
+                    context.push('/personal-details');
                   } else {
-                    context.go('/business-details');
+                    context.push('/business-details');
                   }
                 },
                 style: ElevatedButton.styleFrom(
